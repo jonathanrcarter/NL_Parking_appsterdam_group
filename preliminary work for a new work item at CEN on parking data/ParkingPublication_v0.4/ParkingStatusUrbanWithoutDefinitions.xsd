@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<xs:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:D2LogicalModel="http://datex2.eu/schema/2/2_0" version="2.2" targetNamespace="http://datex2.eu/schema/2/2_0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="_ExtensionType">
+    <xs:sequence>
+      <xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="_MeasurementSiteRecordVersionedReference">
+    <xs:complexContent>
+      <xs:extension base="D2LogicalModel:VersionedReference">
+        <xs:attribute name="targetClass" use="required" fixed="MeasurementSiteRecord" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="_ParkingAreaVersionedReference">
+    <xs:complexContent>
+      <xs:extension base="D2LogicalModel:VersionedReference">
+        <xs:attribute name="targetClass" use="required" fixed="ParkingArea" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="_ParkingEntranceOrExitReference">
+    <xs:complexContent>
+      <xs:extension base="D2LogicalModel:Reference">
+        <xs:attribute name="targetClass" use="required" fixed="ParkingEntranceOrExit" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="_ParkingFacilityVersionedReference">
+    <xs:complexContent>
+      <xs:extension base="D2LogicalModel:VersionedReference">
+        <xs:attribute name="targetClass" use="required" fixed="ParkingFacility" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="_ParkingPropertiesStatusIndex1ParkingEquipmentAndServicesStatus">
+    <xs:sequence>
+      <xs:element name="parkingEquipmentAndServicesStatus" type="D2LogicalModel:ParkingEquipmentAndServicesStatus" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="index1" type="xs:int" use="required" />
+  </xs:complexType>
+  <xs:complexType name="_ParkingPropertiesStatusIndex2AssignedParkingSpacesStatus">
+    <xs:sequence>
+      <xs:element name="assignedParkingSpacesStatus" type="D2LogicalModel:AssignedParkingSpacesStatus" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="index2" type="xs:int" use="required" />
+  </xs:complexType>
+  <xs:complexType name="_VehicleCharacteristicsExtensionType">
+    <xs:sequence>
+      <xs:element name="vehicleCharacteristicsExtended" type="D2LogicalModel:VehicleCharacteristicsExtended" minOccurs="0" />
+      <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="AreaOfInterestEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="continentWide" />
+      <xs:enumeration value="national" />
+      <xs:enumeration value="neighbouringCountries" />
+      <xs:enumeration value="notSpecified" />
+      <xs:enumeration value="regional" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="AssignedParkingSpacesStatus">
+    <xs:sequence>
+      <xs:element name="assignedParkingDeclarationValidNow" type="D2LogicalModel:Boolean" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingOccupancyAndDetection" type="D2LogicalModel:ParkingOccupancyAndDetection" />
+      <xs:element name="assignedParkingSpacesStatusExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="Boolean">
+    <xs:restriction base="xs:boolean" />
+  </xs:simpleType>
+  <xs:simpleType name="ComparisonOperatorEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="equalTo" />
+      <xs:enumeration value="greaterThan" />
+      <xs:enumeration value="greaterThanOrEqualTo" />
+      <xs:enumeration value="lessThan" />
+      <xs:enumeration value="lessThanOrEqualTo" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ComputationMethodEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="arithmeticAverageOfSamplesBasedOnAFixedNumberOfSamples" />
+      <xs:enumeration value="arithmeticAverageOfSamplesInATimePeriod" />
+      <xs:enumeration value="harmonicAverageOfSamplesInATimePeriod" />
+      <xs:enumeration value="medianOfSamplesInATimePeriod" />
+      <xs:enumeration value="movingAverageOfSamples" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ConfidentialityValueEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="internalUse" />
+      <xs:enumeration value="noRestriction" />
+      <xs:enumeration value="restrictedToAuthorities" />
+      <xs:enumeration value="restrictedToAuthoritiesAndTrafficOperators" />
+      <xs:enumeration value="restrictedToAuthoritiesTrafficOperatorsAndPublishers" />
+      <xs:enumeration value="restrictedToAuthoritiesTrafficOperatorsAndVms" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CountryEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="at" />
+      <xs:enumeration value="be" />
+      <xs:enumeration value="bg" />
+      <xs:enumeration value="ch" />
+      <xs:enumeration value="cs" />
+      <xs:enumeration value="cy" />
+      <xs:enumeration value="cz" />
+      <xs:enumeration value="de" />
+      <xs:enumeration value="dk" />
+      <xs:enumeration value="ee" />
+      <xs:enumeration value="es" />
+      <xs:enumeration value="fi" />
+      <xs:enumeration value="fo" />
+      <xs:enumeration value="fr" />
+      <xs:enumeration value="gb" />
+      <xs:enumeration value="gg" />
+      <xs:enumeration value="gi" />
+      <xs:enumeration value="gr" />
+      <xs:enumeration value="hr" />
+      <xs:enumeration value="hu" />
+      <xs:enumeration value="ie" />
+      <xs:enumeration value="im" />
+      <xs:enumeration value="is" />
+      <xs:enumeration value="it" />
+      <xs:enumeration value="je" />
+      <xs:enumeration value="li" />
+      <xs:enumeration value="lt" />
+      <xs:enumeration value="lu" />
+      <xs:enumeration value="lv" />
+      <xs:enumeration value="ma" />
+      <xs:enumeration value="mc" />
+      <xs:enumeration value="mk" />
+      <xs:enumeration value="mt" />
+      <xs:enumeration value="nl" />
+      <xs:enumeration value="no" />
+      <xs:enumeration value="pl" />
+      <xs:enumeration value="pt" />
+      <xs:enumeration value="ro" />
+      <xs:enumeration value="se" />
+      <xs:enumeration value="si" />
+      <xs:enumeration value="sk" />
+      <xs:enumeration value="sm" />
+      <xs:enumeration value="tr" />
+      <xs:enumeration value="va" />
+      <xs:enumeration value="other" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="d2LogicalModel" type="D2LogicalModel:D2LogicalModel" />
+  <xs:complexType name="D2LogicalModel">
+    <xs:sequence>
+      <xs:element name="exchange" type="D2LogicalModel:Exchange" />
+      <xs:element name="payloadPublication" type="D2LogicalModel:PayloadPublication" minOccurs="0" />
+      <xs:element name="d2LogicalModelExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="modelBaseVersion" use="required" fixed="2" />
+    <xs:attribute name="extensionName" use="optional" default="Parking Publication" />
+    <xs:attribute name="extensionVersion" use="optional" default="v0.4" />
+  </xs:complexType>
+  <xs:simpleType name="DateTime">
+    <xs:restriction base="xs:dateTime" />
+  </xs:simpleType>
+  <xs:complexType name="Exchange">
+    <xs:sequence>
+      <xs:element name="response" type="D2LogicalModel:ResponseEnum" minOccurs="0" maxOccurs="1" />
+      <xs:element name="subscriptionReference" type="D2LogicalModel:String" minOccurs="0" maxOccurs="1" />
+      <xs:element name="supplierIdentification" type="D2LogicalModel:InternationalIdentifier" />
+      <xs:element name="exchangeExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="Float">
+    <xs:restriction base="xs:float" />
+  </xs:simpleType>
+  <xs:simpleType name="FuelType2Enum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="all" />
+      <xs:enumeration value="petrol95Octane" />
+      <xs:enumeration value="petrol98Octane" />
+      <xs:enumeration value="petrolLeaded" />
+      <xs:enumeration value="petrolUnleaded" />
+      <xs:enumeration value="unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="FuelTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="battery" />
+      <xs:enumeration value="biodiesel" />
+      <xs:enumeration value="diesel" />
+      <xs:enumeration value="dieselBatteryHybrid" />
+      <xs:enumeration value="ethanol" />
+      <xs:enumeration value="hydrogen" />
+      <xs:enumeration value="liquidGas" />
+      <xs:enumeration value="lpg" />
+      <xs:enumeration value="methane" />
+      <xs:enumeration value="petrol" />
+      <xs:enumeration value="petrolBatteryHybrid" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="GrossWeightCharacteristic">
+    <xs:sequence>
+      <xs:element name="comparisonOperator" type="D2LogicalModel:ComparisonOperatorEnum" minOccurs="1" maxOccurs="1" />
+      <xs:element name="grossVehicleWeight" type="D2LogicalModel:Tonnes" minOccurs="1" maxOccurs="1" />
+      <xs:element name="grossWeightCharacteristicExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HeaderInformation">
+    <xs:sequence>
+      <xs:element name="areaOfInterest" type="D2LogicalModel:AreaOfInterestEnum" minOccurs="0" maxOccurs="1" />
+      <xs:element name="confidentiality" type="D2LogicalModel:ConfidentialityValueEnum" minOccurs="1" maxOccurs="1" />
+      <xs:element name="informationStatus" type="D2LogicalModel:InformationStatusEnum" minOccurs="1" maxOccurs="1" />
+      <xs:element name="urgency" type="D2LogicalModel:UrgencyEnum" minOccurs="0" maxOccurs="1" />
+      <xs:element name="headerInformationExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HeaviestAxleWeightCharacteristic">
+    <xs:sequence>
+      <xs:element name="comparisonOperator" type="D2LogicalModel:ComparisonOperatorEnum" minOccurs="1" maxOccurs="1" />
+      <xs:element name="heaviestAxleWeight" type="D2LogicalModel:Tonnes" minOccurs="1" maxOccurs="1" />
+      <xs:element name="heaviestAxleWeightCharacteristicExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HeightCharacteristic">
+    <xs:sequence>
+      <xs:element name="comparisonOperator" type="D2LogicalModel:ComparisonOperatorEnum" minOccurs="1" maxOccurs="1" />
+      <xs:element name="vehicleHeight" type="D2LogicalModel:MetresAsFloat" minOccurs="1" maxOccurs="1" />
+      <xs:element name="heightCharacteristicExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="InformationStatusEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="real" />
+      <xs:enumeration value="securityExercise" />
+      <xs:enumeration value="technicalExercise" />
+      <xs:enumeration value="test" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="InternationalIdentifier">
+    <xs:sequence>
+      <xs:element name="country" type="D2LogicalModel:CountryEnum" minOccurs="1" maxOccurs="1" />
+      <xs:element name="nationalIdentifier" type="D2LogicalModel:String" minOccurs="1" maxOccurs="1" />
+      <xs:element name="internationalIdentifierExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="Language">
+    <xs:restriction base="xs:language" />
+  </xs:simpleType>
+  <xs:complexType name="LengthCharacteristic">
+    <xs:sequence>
+      <xs:element name="comparisonOperator" type="D2LogicalModel:ComparisonOperatorEnum" minOccurs="1" maxOccurs="1" />
+      <xs:element name="vehicleLength" type="D2LogicalModel:MetresAsFloat" minOccurs="1" maxOccurs="1" />
+      <xs:element name="lengthCharacteristicExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="LoadType2Enum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="refrigeratedGoods" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LoadTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="abnormalLoad" />
+      <xs:enumeration value="ammunition" />
+      <xs:enumeration value="chemicals" />
+      <xs:enumeration value="combustibleMaterials" />
+      <xs:enumeration value="corrosiveMaterials" />
+      <xs:enumeration value="debris" />
+      <xs:enumeration value="empty" />
+      <xs:enumeration value="explosiveMaterials" />
+      <xs:enumeration value="extraHighLoad" />
+      <xs:enumeration value="extraLongLoad" />
+      <xs:enumeration value="extraWideLoad" />
+      <xs:enumeration value="fuel" />
+      <xs:enumeration value="glass" />
+      <xs:enumeration value="goods" />
+      <xs:enumeration value="hazardousMaterials" />
+      <xs:enumeration value="liquid" />
+      <xs:enumeration value="livestock" />
+      <xs:enumeration value="materials" />
+      <xs:enumeration value="materialsDangerousForPeople" />
+      <xs:enumeration value="materialsDangerousForTheEnvironment" />
+      <xs:enumeration value="materialsDangerousForWater" />
+      <xs:enumeration value="oil" />
+      <xs:enumeration value="ordinary" />
+      <xs:enumeration value="perishableProducts" />
+      <xs:enumeration value="petrol" />
+      <xs:enumeration value="pharmaceuticalMaterials" />
+      <xs:enumeration value="radioactiveMaterials" />
+      <xs:enumeration value="refuse" />
+      <xs:enumeration value="toxicMaterials" />
+      <xs:enumeration value="vehicles" />
+      <xs:enumeration value="other" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MetresAsFloat">
+    <xs:restriction base="D2LogicalModel:Float" />
+  </xs:simpleType>
+  <xs:complexType name="MultilingualString">
+    <xs:sequence>
+      <xs:element name="values">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="value" type="D2LogicalModel:MultilingualStringValue" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MultilingualStringValue">
+    <xs:simpleContent>
+      <xs:extension base="D2LogicalModel:MultilingualStringValueType">
+        <xs:attribute name="lang" type="xs:language" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="MultilingualStringValueType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="1024" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="NonNegativeInteger">
+    <xs:restriction base="xs:nonNegativeInteger" />
+  </xs:simpleType>
+  <xs:complexType name="NumberOfAxlesCharacteristic">
+    <xs:sequence>
+      <xs:element name="comparisonOperator" type="D2LogicalModel:ComparisonOperatorEnum" minOccurs="1" maxOccurs="1" />
+      <xs:element name="numberOfAxles" type="D2LogicalModel:NonNegativeInteger" minOccurs="1" maxOccurs="1" />
+      <xs:element name="numberOfAxlesCharacteristicExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ParkingAreaStatus">
+    <xs:sequence>
+      <xs:element name="parkingAreaReference" type="D2LogicalModel:_ParkingAreaVersionedReference" minOccurs="1" maxOccurs="1" />
+      <xs:element name="parkingAreaStatus" type="D2LogicalModel:ParkingAreaStatusEnum" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="parkingAreaStatusTime" type="D2LogicalModel:DateTime" minOccurs="1" maxOccurs="1" />
+      <xs:element name="parkingPropertiesStatus" type="D2LogicalModel:ParkingPropertiesStatus" />
+      <xs:element name="parkingAreaStatusExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ParkingAreaStatusEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="allParkingsFull" />
+      <xs:enumeration value="multiStoreyParkingsFull" />
+      <xs:enumeration value="noMoreParkingSpacesAvailable" />
+      <xs:enumeration value="enoughSpacesAvailable" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ParkingEquipmentAndServicesStatus">
+    <xs:sequence>
+      <xs:element name="totalAmountOfServiceFacilitiesOverride" type="D2LogicalModel:NonNegativeInteger" minOccurs="0" maxOccurs="1" />
+      <xs:element name="totalAmountOfEquipmentOrServiceFacilitySubitemsOverride" type="D2LogicalModel:NonNegativeInteger" minOccurs="0" maxOccurs="1" />
+      <xs:element name="amountOfServiceFacilitiesHandicappedAccessibleOverride" type="D2LogicalModel:NonNegativeInteger" minOccurs="0" maxOccurs="1" />
+      <xs:element name="amountOfEquipmentOrServiceFacilitySubitemsOverride" type="D2LogicalModel:NonNegativeInteger" minOccurs="0" maxOccurs="1" />
+      <xs:element name="currentlyVacantEquipmentOrServiceFacilitySubItems" type="D2LogicalModel:NonNegativeInteger" minOccurs="0" maxOccurs="1" />
+      <xs:element name="currentlyVacantEquipmentOrServiceFacilitySubItemsHandicappedAccessible" type="D2LogicalModel:NonNegativeInteger" minOccurs="0" maxOccurs="1" />
+      <xs:element name="serviceInOperation" type="D2LogicalModel:ServiceOperationTypeEnum" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingEquipmentAndServicesStatusExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ParkingFacilityFaultEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="communicationsFailure" />
+      <xs:enumeration value="entranceExitBarrierMalfunction" />
+      <xs:enumeration value="entranceExitObstructed" />
+      <xs:enumeration value="erroneousOccupancyInformation" />
+      <xs:enumeration value="erroneousOccupancyInformationDisplayed" />
+      <xs:enumeration value="paymentMachinesInoperative" />
+      <xs:enumeration value="reservationServiceOutOfOrder" />
+      <xs:enumeration value="noParkingInformationAvailable" />
+      <xs:enumeration value="unspecified" />
+      <xs:enumeration value="unknown" />
+      <xs:enumeration value="other" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ParkingFacilityStatus">
+    <xs:sequence>
+      <xs:element name="parkingFacilityReference" type="D2LogicalModel:_ParkingFacilityVersionedReference" minOccurs="1" maxOccurs="1" />
+      <xs:element name="parkingFacilityStatusTime" type="D2LogicalModel:DateTime" minOccurs="1" maxOccurs="1" />
+      <xs:element name="parkingFacilityStatus" type="D2LogicalModel:ParkingFacilityStatusEnum" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="parkingFacilityStatusDescription" type="D2LogicalModel:MultilingualString" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingFacilityQueuingTime" type="D2LogicalModel:Seconds" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingFacilityFault" type="D2LogicalModel:ParkingFacilityFaultEnum" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="parkingPropertiesStatus" type="D2LogicalModel:ParkingPropertiesStatus" />
+      <xs:element name="parkingFacilityStatusExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ParkingFacilityStatusEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="open" />
+      <xs:enumeration value="closed" />
+      <xs:enumeration value="closedAbnormal" />
+      <xs:enumeration value="spacesAvailable" />
+      <xs:enumeration value="almostFull" />
+      <xs:enumeration value="fullAtEntrance" />
+      <xs:enumeration value="full" />
+      <xs:enumeration value="statusUnknown" />
+      <xs:enumeration value="normalParkingConditionsSuspended" />
+      <xs:enumeration value="specialParkingConditionsInForce" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ParkingOccupancyAndDetection">
+    <xs:sequence>
+      <xs:element name="parkingNumberOfSpacesOverride" type="D2LogicalModel:NonNegativeInteger" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingNumberOfVacantSpaces" type="D2LogicalModel:NonNegativeInteger" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingNumberOfVacantSpacesLowerThan" type="D2LogicalModel:NonNegativeInteger" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingNumberOfVacantSpacesGraded" type="D2LogicalModel:ParkingVacantSpacesEnum" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingNumberOfOccupiedSpaces" type="D2LogicalModel:NonNegativeInteger" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingOccupancy" type="D2LogicalModel:Percentage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingOccupancyGraded" type="D2LogicalModel:ParkingOccupancyEnum" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingOccupancyTrend" type="D2LogicalModel:ParkingOccupancyTrendEnum" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingNotAllowed" type="D2LogicalModel:Boolean" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingVehicleRates" type="D2LogicalModel:ParkingVehicleRates" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="parkingSingleSlotDetection" type="D2LogicalModel:ParkingSingleSlotDetection" minOccurs="0" />
+      <xs:element name="parkingOccupancyAndDetectionExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ParkingOccupancyEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="expectCarParkToBeFull" />
+      <xs:enumeration value="percentage10" />
+      <xs:enumeration value="percentage20" />
+      <xs:enumeration value="percentage30" />
+      <xs:enumeration value="percentage40" />
+      <xs:enumeration value="percentage50" />
+      <xs:enumeration value="percentage60" />
+      <xs:enumeration value="percentage70" />
+      <xs:enumeration value="percentage80" />
+      <xs:enumeration value="percentage90" />
+      <xs:enumeration value="full" />
+      <xs:enumeration value="unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ParkingOccupancyTrendEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="decreasing" />
+      <xs:enumeration value="increasing" />
+      <xs:enumeration value="stable" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ParkingPropertiesStatus">
+    <xs:sequence>
+      <xs:element name="forecast" type="D2LogicalModel:Boolean" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingNumberOfSpacesShortTermOverride" type="D2LogicalModel:NonNegativeInteger" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingNumberOfSpacesLongTermOverride" type="D2LogicalModel:NonNegativeInteger" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingEquipmentAndServicesStatus" type="D2LogicalModel:_ParkingPropertiesStatusIndex1ParkingEquipmentAndServicesStatus" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="parkingOccupancyAndDetection" type="D2LogicalModel:ParkingOccupancyAndDetection" />
+      <xs:element name="assignedParkingSpacesStatus" type="D2LogicalModel:_ParkingPropertiesStatusIndex2AssignedParkingSpacesStatus" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="parkingPropertiesStatusExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ParkingSingleSlotDetection">
+    <xs:sequence>
+      <xs:element name="measurementTimeDefault" type="D2LogicalModel:DateTime" minOccurs="1" maxOccurs="1" />
+      <xs:element name="parkingSlot" type="D2LogicalModel:ParkingSlot" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="parkingSingleSlotDetectionExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ParkingSlot">
+    <xs:sequence>
+      <xs:element name="parkingSlotIdentifier" type="D2LogicalModel:String" minOccurs="1" maxOccurs="1" />
+      <xs:element name="parkingSlotOccupied" type="D2LogicalModel:Boolean" minOccurs="1" maxOccurs="1" />
+      <xs:element name="measurementOrCalculationTime" type="D2LogicalModel:DateTime" minOccurs="0" maxOccurs="1" />
+      <xs:element name="accuracy" type="D2LogicalModel:Percentage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="lastCalibration" type="D2LogicalModel:DateTime" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingSlotExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ParkingStatusPublication">
+    <xs:complexContent>
+      <xs:extension base="D2LogicalModel:PayloadPublication">
+        <xs:sequence>
+          <xs:element name="headerInformation" type="D2LogicalModel:HeaderInformation" minOccurs="0" />
+          <xs:element name="parkingAreaStatus" type="D2LogicalModel:ParkingAreaStatus" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name="parkingFacilityStatus" type="D2LogicalModel:ParkingFacilityStatus" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name="parkingStatusPublicationExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ParkingVacantSpacesEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="noParkingSpacesAvailable" />
+      <xs:enumeration value="expectNoParkingSpacesAvailable" />
+      <xs:enumeration value="onlyAFewParkingSpacesAvailable" />
+      <xs:enumeration value="lessThan10ParkingSpacesAvailable" />
+      <xs:enumeration value="lessThan20ParkingSpacesAvailable" />
+      <xs:enumeration value="lessThan30ParkingSpacesAvailable" />
+      <xs:enumeration value="lessThan40ParkingSpacesAvailable" />
+      <xs:enumeration value="lessThan50ParkingSpacesAvailable" />
+      <xs:enumeration value="unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ParkingVehicleRates">
+    <xs:sequence>
+      <xs:element name="measurementSiteReference" type="D2LogicalModel:_MeasurementSiteRecordVersionedReference" minOccurs="0" maxOccurs="1" />
+      <xs:element name="measuredValueIndex" type="D2LogicalModel:NonNegativeInteger" minOccurs="0" maxOccurs="1" />
+      <xs:element name="dedicatedEntryOrExit" type="D2LogicalModel:_ParkingEntranceOrExitReference" minOccurs="0" maxOccurs="1" />
+      <xs:element name="measurementTimeDefault" type="D2LogicalModel:DateTime" minOccurs="0" maxOccurs="1" />
+      <xs:element name="accuracy" type="D2LogicalModel:Percentage" minOccurs="0" maxOccurs="1" />
+      <xs:element name="lastCalibration" type="D2LogicalModel:DateTime" minOccurs="0" maxOccurs="1" />
+      <xs:element name="computationMethod" type="D2LogicalModel:ComputationMethodEnum" minOccurs="0" maxOccurs="1" />
+      <xs:element name="parkingVehicleRateValue" type="D2LogicalModel:ParkingVehicleRateValue" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="parkingVehicleRatesExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ParkingVehicleRateValue">
+    <xs:sequence>
+      <xs:element name="measurementOrCalculationTime" type="D2LogicalModel:DateTime" minOccurs="0" maxOccurs="1" />
+      <xs:element name="fillRate" type="D2LogicalModel:VehiclesPerHour" minOccurs="0" maxOccurs="1" />
+      <xs:element name="exitRate" type="D2LogicalModel:VehiclesPerHour" minOccurs="0" maxOccurs="1" />
+      <xs:element name="vehicleFlowRate" type="D2LogicalModel:VehiclesPerHour" minOccurs="0" maxOccurs="1" />
+      <xs:element name="forVehiclesWithCharacteristicsOf" type="D2LogicalModel:VehicleCharacteristics" minOccurs="0" />
+      <xs:element name="parkingVehicleRateValueExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PayloadPublication" abstract="true">
+    <xs:sequence>
+      <xs:element name="publicationTime" type="D2LogicalModel:DateTime" minOccurs="1" maxOccurs="1" />
+      <xs:element name="publicationCreator" type="D2LogicalModel:InternationalIdentifier" />
+      <xs:element name="payloadPublicationExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="lang" type="D2LogicalModel:Language" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="Percentage">
+    <xs:restriction base="D2LogicalModel:Float" />
+  </xs:simpleType>
+  <xs:complexType name="Reference">
+    <xs:attribute name="id" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="ResponseEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="acknowledge" />
+      <xs:enumeration value="catalogueRequestDenied" />
+      <xs:enumeration value="filterRequestDenied" />
+      <xs:enumeration value="requestDenied" />
+      <xs:enumeration value="subscriptionRequestDenied" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Seconds">
+    <xs:restriction base="D2LogicalModel:Float" />
+  </xs:simpleType>
+  <xs:simpleType name="ServiceOperationTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="openingTimesInForce" />
+      <xs:enumeration value="inOperation" />
+      <xs:enumeration value="limitedOperation" />
+      <xs:enumeration value="notInOperation" />
+      <xs:enumeration value="notInOperationAbnormal" />
+      <xs:enumeration value="unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="String">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="1024" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Tonnes">
+    <xs:restriction base="D2LogicalModel:Float" />
+  </xs:simpleType>
+  <xs:simpleType name="UrgencyEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="extremelyUrgent" />
+      <xs:enumeration value="urgent" />
+      <xs:enumeration value="normalUrgency" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="VehicleCharacteristics">
+    <xs:sequence>
+      <xs:element name="fuelType" type="D2LogicalModel:FuelTypeEnum" minOccurs="0" maxOccurs="1" />
+      <xs:element name="loadType" type="D2LogicalModel:LoadTypeEnum" minOccurs="0" maxOccurs="1" />
+      <xs:element name="vehicleEquipment" type="D2LogicalModel:VehicleEquipmentEnum" minOccurs="0" maxOccurs="1" />
+      <xs:element name="vehicleType" type="D2LogicalModel:VehicleTypeEnum" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="vehicleUsage" type="D2LogicalModel:VehicleUsageEnum" minOccurs="0" maxOccurs="1" />
+      <xs:element name="grossWeightCharacteristic" type="D2LogicalModel:GrossWeightCharacteristic" minOccurs="0" maxOccurs="2" />
+      <xs:element name="heightCharacteristic" type="D2LogicalModel:HeightCharacteristic" minOccurs="0" maxOccurs="2" />
+      <xs:element name="lengthCharacteristic" type="D2LogicalModel:LengthCharacteristic" minOccurs="0" maxOccurs="2" />
+      <xs:element name="widthCharacteristic" type="D2LogicalModel:WidthCharacteristic" minOccurs="0" maxOccurs="2" />
+      <xs:element name="heaviestAxleWeightCharacteristic" type="D2LogicalModel:HeaviestAxleWeightCharacteristic" minOccurs="0" maxOccurs="2" />
+      <xs:element name="numberOfAxlesCharacteristic" type="D2LogicalModel:NumberOfAxlesCharacteristic" minOccurs="0" maxOccurs="2" />
+      <xs:element name="vehicleCharacteristicsExtension" type="D2LogicalModel:_VehicleCharacteristicsExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VehicleCharacteristicsExtended">
+    <xs:sequence>
+      <xs:element name="emissionClassification" type="D2LogicalModel:String" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="operationFreeOfEmission" type="D2LogicalModel:Boolean" minOccurs="0" maxOccurs="1" />
+      <xs:element name="loadType2" type="D2LogicalModel:LoadType2Enum" minOccurs="0" maxOccurs="1" />
+      <xs:element name="vehicleType2" type="D2LogicalModel:VehicleType2Enum" minOccurs="0" maxOccurs="1" />
+      <xs:element name="fuelType2" type="D2LogicalModel:FuelType2Enum" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="VehicleEquipmentEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="notUsingSnowChains" />
+      <xs:enumeration value="notUsingSnowChainsOrTyres" />
+      <xs:enumeration value="snowChainsInUse" />
+      <xs:enumeration value="snowTyresInUse" />
+      <xs:enumeration value="snowChainsOrTyresInUse" />
+      <xs:enumeration value="withoutSnowTyresOrChainsOnBoard" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="VehiclesPerHour">
+    <xs:restriction base="D2LogicalModel:NonNegativeInteger" />
+  </xs:simpleType>
+  <xs:simpleType name="VehicleType2Enum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="motorhome" />
+      <xs:enumeration value="lightGoodsVehicle" />
+      <xs:enumeration value="heavyGoodsVehicle" />
+      <xs:enumeration value="minibus" />
+      <xs:enumeration value="smallCar" />
+      <xs:enumeration value="largeCar" />
+      <xs:enumeration value="lightGoodsVehicleWithTrailer" />
+      <xs:enumeration value="heavyGoodsVehicleWithTrailer" />
+      <xs:enumeration value="passengerCar" />
+      <xs:enumeration value="unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="VehicleTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="agriculturalVehicle" />
+      <xs:enumeration value="anyVehicle" />
+      <xs:enumeration value="articulatedVehicle" />
+      <xs:enumeration value="bicycle" />
+      <xs:enumeration value="bus" />
+      <xs:enumeration value="car" />
+      <xs:enumeration value="caravan" />
+      <xs:enumeration value="carOrLightVehicle" />
+      <xs:enumeration value="carWithCaravan" />
+      <xs:enumeration value="carWithTrailer" />
+      <xs:enumeration value="constructionOrMaintenanceVehicle" />
+      <xs:enumeration value="fourWheelDrive" />
+      <xs:enumeration value="highSidedVehicle" />
+      <xs:enumeration value="lorry" />
+      <xs:enumeration value="moped" />
+      <xs:enumeration value="motorcycle" />
+      <xs:enumeration value="motorcycleWithSideCar" />
+      <xs:enumeration value="motorscooter" />
+      <xs:enumeration value="tanker" />
+      <xs:enumeration value="threeWheeledVehicle" />
+      <xs:enumeration value="trailer" />
+      <xs:enumeration value="tram" />
+      <xs:enumeration value="twoWheeledVehicle" />
+      <xs:enumeration value="van" />
+      <xs:enumeration value="vehicleWithCatalyticConverter" />
+      <xs:enumeration value="vehicleWithoutCatalyticConverter" />
+      <xs:enumeration value="vehicleWithCaravan" />
+      <xs:enumeration value="vehicleWithTrailer" />
+      <xs:enumeration value="withEvenNumberedRegistrationPlates" />
+      <xs:enumeration value="withOddNumberedRegistrationPlates" />
+      <xs:enumeration value="other" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="VehicleUsageEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="agricultural" />
+      <xs:enumeration value="commercial" />
+      <xs:enumeration value="emergencyServices" />
+      <xs:enumeration value="military" />
+      <xs:enumeration value="nonCommercial" />
+      <xs:enumeration value="patrol" />
+      <xs:enumeration value="recoveryServices" />
+      <xs:enumeration value="roadMaintenanceOrConstruction" />
+      <xs:enumeration value="roadOperator" />
+      <xs:enumeration value="taxi" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="VersionedReference">
+    <xs:attribute name="id" type="xs:string" use="required" />
+    <xs:attribute name="version" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="WidthCharacteristic">
+    <xs:sequence>
+      <xs:element name="comparisonOperator" type="D2LogicalModel:ComparisonOperatorEnum" minOccurs="1" maxOccurs="1" />
+      <xs:element name="vehicleWidth" type="D2LogicalModel:MetresAsFloat" minOccurs="1" maxOccurs="1" />
+      <xs:element name="widthCharacteristicExtension" type="D2LogicalModel:_ExtensionType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
